@@ -15,11 +15,9 @@
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
   min-height: 100vh;
-  background: url(../assets/background.png) 0 0 / cover no-repeat;;
+  background: url(../assets/background.png) no-repeat center center fixed;
+  background-size: cover;
 }
 
 h1 {
