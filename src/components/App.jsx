@@ -1,5 +1,6 @@
 import '../styles/App.css'
 import Scoreboard from './Scoreboard'
+import Game from './Game'
 
 function App() {
     return(
@@ -8,6 +9,7 @@ function App() {
             <h1>Poker Memory Challenge</h1>
         </header>
         <Scoreboard />
+        <Game />
         </>
     )
 }
