@@ -24,7 +24,7 @@ async function getCards() {
     }
 }
 
-export default function Game() {
+export default function Game({ currentScore, bestScore, setCurrentScore, setBestScore }) {
     const [cards, setCards] = useState([])
     const [error, setError] = useState(null)
     const [seenCards, setSeenCards] = useState([])
@@ -53,9 +53,15 @@ export default function Game() {
                 console.log('Game Over')
                 setSeenCards([])
                 setGameStatus(false)
+
+                if (currentScore > bestScore) {
+                    setBestScore(currentScore)
+                }
+
             } else {
                 setSeenCards(prev => [...prev, code])
                 console.log(`Card Added: ${code}`)
+                setCurrentScore(current => current + 1)
             }
         }
     }
