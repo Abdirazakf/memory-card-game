@@ -7,29 +7,41 @@ async function getDeckID() {
         const data = await response.json()
 
         return data.deck_id
-    } catch(err){
+    } catch(err) {
+        throw new Error(err)
+    }
+}
+
+async function getCards() {
+    try {
+        const id = await getDeckID()
+        const response = await fetch(`https://deckofcardsapi.com/api/deck/${id}/draw/?count=18`)
+        const data = await response.json()
+
+        return data.cards
+    } catch(err) {
         throw new Error(err)
     }
 }
 
 export default function Game() {
-    const [deckID, setDeckID] = useState(null)
+    const [cards, setCards] = useState([])
     const [error, setError] = useState(null)
 
     useEffect(() => {
-        async function fetchDeck() {
+        async function fetchCards() {
             try {
-                const id = await getDeckID()
-                setDeckID(id)
+                const deck = await getCards()
+                setCards(deck)
             } catch(err) {
                 setError(err.message)
             }
         }
 
-        fetchDeck()
+        fetchCards()
     }, [])
 
-    console.log(deckID)
+    console.log(cards)
 
     if (error) {
         return <div>Error: {error}</div>
@@ -38,25 +50,13 @@ export default function Game() {
     return (
         <main>
             <div className="game-container">
-                {/* Sample - The Game cards will go here */}
-                <div className="card">'card-1'</div>
-                <div className="card">'card-2'</div>
-                <div className="card">'card-3'</div>
-                <div className="card">'card-4'</div>
-                <div className="card">'card-5'</div>
-                <div className="card">'card-6'</div>
-                <div className="card">'card-7'</div>
-                <div className="card">'card-8'</div>
-                <div className="card">'card-9'</div>
-                <div className="card">'card-10'</div>
-                <div className="card">'card-11'</div>
-                <div className="card">'card-12'</div>
-                <div className="card">'card-13'</div>
-                <div className="card">'card-14'</div>
-                <div className="card">'card-15'</div>
-                <div className="card">'card-16'</div>
-                <div className="card">'card-17'</div>
-                <div className="card">'card-18'</div>
+                {cards.map(card => (
+                    <div 
+                        key={card.code} 
+                        className='card' 
+                        style={{ backgroundImage: `url(${card.image})`}}    
+                    ></div>
+                ))}
             </div>
         </main>
     )
