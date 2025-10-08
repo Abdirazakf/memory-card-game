@@ -1,0 +1,15 @@
+:root {
+    --gold: #d4b564;
+    --dark-green: #19271a;
+    --green: #223b26;
+}
+
+.scoreboard {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.score-container {
+    border: 2px solid var(--gold);
+}
