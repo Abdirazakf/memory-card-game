@@ -28,6 +28,7 @@ export default function Game() {
     const [cards, setCards] = useState([])
     const [error, setError] = useState(null)
     const [seenCards, setSeenCards] = useState([])
+    const [gameActive, setGameStatus] = useState(true)
 
     useEffect(() => {
         async function fetchCards() {
@@ -47,28 +48,32 @@ export default function Game() {
     }
 
     function handleClick(code) {
-        if (seenCards.includes(code)) {
-            console.log('Game Over')
-
-            setSeenCards([])
-        } else {
-            setSeenCards(prev => [...prev, code])
-            console.log(`Card Added: ${code}`)
+        if (gameActive) {
+            if (seenCards.includes(code)) {
+                console.log('Game Over')
+                setSeenCards([])
+                setGameStatus(false)
+            } else {
+                setSeenCards(prev => [...prev, code])
+                console.log(`Card Added: ${code}`)
+            }
         }
     }
 
     return (
+        <>
         <main>
             <div className="game-container">
                 {cards.map(card => (
                     <div 
-                        key={card.code} 
-                        className='card' 
-                        style={{ backgroundImage: `url(${card.image})`}}
-                        onClick={() => handleClick(card.code)}
+                    key={card.code} 
+                    className='card' 
+                    style={{ backgroundImage: `url(${card.image})`}}
+                    onClick={() => handleClick(card.code)}
                     ></div>
                 ))}
             </div>
         </main>
+        </>
     )
 }

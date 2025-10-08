@@ -13,7 +13,8 @@ main {
 
 .card {
     aspect-ratio: 5 / 7;
-    background: url(../assets/back-of-card.png) no-repeat center center;
+    background-repeat: no-repeat;
+    background-position: center;
     background-size: cover;
     border-radius: 8px;
     display: flex;
@@ -34,6 +35,10 @@ main {
 
 .card:active {
     transform: translateY(-2px);
+}
+
+.back {
+    background: url(../assets/back-of-card.png);
 }
 
 @media (max-width: 1024px) {
