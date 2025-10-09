@@ -44,6 +44,7 @@ main {
 .back {
     background: url(../assets/back-of-card.png) no-repeat center center;
     background-size: cover;
+    transform: rotateY(180deg);
 }
 
 @media (max-width: 1024px) {
