@@ -54,8 +54,35 @@ main {
 
 .reset-button {
     min-width: 200px;
+    padding: 15px 40px;
     background-color: var(--score-bg);
+    border: 3px solid var(--gold);
+    border-radius: 10px;
+    color: var(--gold);
+    font-size: 1.2em;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
     cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4),
+                inset 0 2px 5px rgba(0, 0, 0, 0.3);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.reset-button:hover {
+    background-color: var(--dark-gold);
+    color: var(--dark-green);
+    border-color: var(--dark-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4),
+                inset 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.reset-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4),
+                inset 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 @media (max-width: 1024px) {
