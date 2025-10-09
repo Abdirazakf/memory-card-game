@@ -70,7 +70,6 @@ export default function Game({ currentScore, bestScore, setCurrentScore, setBest
     function handleClick(code) {
         if (gameActive && !flip) {
             if (seenCards.includes(code)) {
-                console.log('Game Over')
                 setSeenCards([])
                 setGameStatus(false)
 
