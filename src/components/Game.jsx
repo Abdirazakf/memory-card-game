@@ -1,5 +1,6 @@
 import '../styles/Game.css'
 import { useState,useEffect } from 'react'
+import shootConfetti from './confetti'
 
 async function getDeckID() {
     try {
@@ -66,6 +67,7 @@ export default function Game({ currentScore, bestScore, setCurrentScore, setBest
 
                 if (currentScore > bestScore) {
                     setBestScore(currentScore)
+                    shootConfetti()
                 }
 
             } else {
