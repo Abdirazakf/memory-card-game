@@ -1,11 +1,18 @@
 import '../styles/App.css'
 import Scoreboard from './Scoreboard'
 import Game from './Game'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function App() {
     const [currentScore, setCurrentScore] = useState(0)
-    const [bestScore, setBestScore] = useState(0)
+    const [bestScore, setBestScore] = useState(() => {
+        const saved = localStorage.getItem('bestScore')
+        return saved ? parseInt(saved) : 0
+    })
+
+    useEffect(() => {
+        localStorage.setItem('bestScore', bestScore)
+    }, [bestScore])
 
     return(
         <>
