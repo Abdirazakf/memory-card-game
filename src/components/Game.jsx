@@ -84,6 +84,21 @@ export default function Game({ currentScore, bestScore, setCurrentScore, setBest
         }
     }
 
+    function handleRestart () {
+        async function getNewCards() {
+            try {
+                const deck = await getCards()
+                setCards(deck)
+            } catch(err) {
+                setError(err.message)
+            }
+        }
+
+        setCurrentScore(0)
+        getNewCards()
+        setGameStatus(true)
+    }
+
     return (
         <>
         <main>
@@ -97,7 +112,7 @@ export default function Game({ currentScore, bestScore, setCurrentScore, setBest
                     ></div>
                 ))}
             </div>
-        {!gameActive && <button className='reset-button'>Restart Game</button>}
+        {!gameActive && <button className='reset-button' onClick={handleRestart}>Restart Game</button>}
         </main>
         </>
     )
