@@ -28,6 +28,7 @@ export default function Game({ currentScore, bestScore, setCurrentScore, setBest
     const [cards, setCards] = useState([])
     const [error, setError] = useState(null)
     const [seenCards, setSeenCards] = useState([])
+    const [flip, setFlip] = useState(false)
     const [gameActive, setGameStatus] = useState(true)
 
     useEffect(() => {
@@ -47,8 +48,17 @@ export default function Game({ currentScore, bestScore, setCurrentScore, setBest
         return <div>Error: {error}</div>
     }
 
+    function shuffle(array) {
+        const shuffled = [...array]
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+        }
+        return shuffled
+    }
+
     function handleClick(code) {
-        if (gameActive) {
+        if (gameActive && !flip) {
             if (seenCards.includes(code)) {
                 console.log('Game Over')
                 setSeenCards([])
@@ -60,8 +70,16 @@ export default function Game({ currentScore, bestScore, setCurrentScore, setBest
 
             } else {
                 setSeenCards(prev => [...prev, code])
-                console.log(`Card Added: ${code}`)
                 setCurrentScore(current => current + 1)
+                setFlip(true)
+
+                setTimeout(() => {
+                    setCards(shuffle(cards))
+
+                    setTimeout(() => {
+                        setFlip(false)
+                    }, 300)
+                }, 600)
             }
         }
     }
@@ -73,8 +91,8 @@ export default function Game({ currentScore, bestScore, setCurrentScore, setBest
                 {cards.map(card => (
                     <div 
                     key={card.code} 
-                    className='card' 
-                    style={{ backgroundImage: `url(${card.image})`}}
+                    className={flip ? 'card back' : 'card'}
+                    style={!flip ? { backgroundImage: `url(${card.image})` } : {}}
                     onClick={() => handleClick(card.code)}
                     ></div>
                 ))}
