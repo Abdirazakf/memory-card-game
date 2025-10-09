@@ -97,6 +97,7 @@ export default function Game({ currentScore, bestScore, setCurrentScore, setBest
                     ></div>
                 ))}
             </div>
+        {!gameActive && <button className='reset-button'>Restart Game</button>}
         </main>
         </>
     )

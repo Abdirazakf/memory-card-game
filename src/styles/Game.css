@@ -1,6 +1,15 @@
+:root {
+    --gold: #d4af37;
+    --dark-gold: #b8941f;
+    --dark-green: #1a3a1f;
+    --score-bg: #2d4a2f;
+}
+
 main {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
 }
 
 .game-container {
@@ -23,7 +32,7 @@ main {
     font-size: clamp(0.8rem, 2vw, 1rem);
     color: white;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.3s ease, box-shadow 0.2s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     min-height: 100px;
 }
@@ -37,14 +46,16 @@ main {
     transform: translateY(-2px);
 }
 
-.card.flip {
-    --rotate-y: 180deg
-}
-
 .back {
     background: url(../assets/back-of-card.png) no-repeat center center;
     background-size: cover;
     transform: rotateY(180deg);
+}
+
+.reset-button {
+    min-width: 200px;
+    background-color: var(--score-bg);
+    cursor: pointer;
 }
 
 @media (max-width: 1024px) {
